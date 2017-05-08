@@ -21,6 +21,5 @@ Number of Buckets: 9
 ## Installation
 
 You need:
- AWS cli tools      http://docs.aws.amazon.com/cli/latest/userguide/installing.html
- jq cli https://stedolan.github.io/jq/
+* AWS cli tools      http://docs.aws.amazon.com/cli/latest/userguide/installing.html * jq cli https://stedolan.github.io/jq/
 
