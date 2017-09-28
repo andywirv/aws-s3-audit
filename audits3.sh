@@ -33,8 +33,10 @@ printf 'Number of Buckets: %s\n' "$numBuckets"
 for ((i=0; i<${#bucketArray[@]}; ++i));
     do
         bucketregion=$(jq --raw-output '.LocationConstraint' <<< $(aws s3api  --profile $PROFILE get-bucket-location --bucket ${bucketArray[$i]}))
-        if [ "$bucketregion" != "null" ]
-            then
+        if [ "$bucketregion" != "null" ]; then
+                if [ $bucketregion == "EU" ]; then
+                    bucketregion="eu-west-1"
+                fi
                 acl=$(aws --region $bucketregion --profile $PROFILE s3api  get-bucket-acl --bucket ${bucketArray[$i]});
             else
                 acl=$(aws --profile $PROFILE s3api  get-bucket-acl --bucket ${bucketArray[$i]});
@@ -44,8 +46,7 @@ for ((i=0; i<${#bucketArray[@]}; ++i));
                         '. | select( .Grants[] .Grantee .URI == "http://acs.amazonaws.com/groups/global/AuthenticatedUsers" or .Grants[] .Grantee .URI == "http://acs.amazonaws.com/groups/global/AllUsers") | .Bucket=$BCKT_NAME' \
                         <<< "$acl")
         
-        if [ -n "$bucketinstance" ]
-            then
+        if [ -n "$bucketinstance" ]; then
                 result="FAIL"
                 colour=$RED
                 echo $bucketname >> failed.txt
