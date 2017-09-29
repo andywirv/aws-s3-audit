@@ -53,7 +53,7 @@ for ((i=0; i<${#bucketArray[@]}; ++i)); do
             result="FAIL"
             colour=$RED
 
-            # This is just to seperate objects in the JSON output
+            # This is just to separate objects in the JSON output
             if [ $i -lt ${#bucketArray[@] -1 } ] && [ $i -ne 0 ]; then
                 comma=","
             fi
