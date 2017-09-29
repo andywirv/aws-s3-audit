@@ -54,7 +54,7 @@ main () {
                 colour=$RED
 
                 # This is just to separate objects in the JSON output
-                if [ $i -lt ${#bucketArray[@] -1 } ] && [ $i -ne 0 ]; then
+                if [ $numFailures -ne 1]; then
                     comma=","
                 fi
                 printf "%s %s" "$comma" "$(jq --raw-output --arg bucketname $bucketname '.bucketname=$bucketname' \
