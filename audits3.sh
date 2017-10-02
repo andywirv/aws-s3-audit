@@ -3,15 +3,14 @@
 # This script uses the AWS cli tools (and the credentials you have configured in ~/.aws/credentials)
 # specify the profile name to use as first argument. Optionally leave blank to use default profile
 set -eo pipefail
+trap "exit" INT TERM
+trap "printf 'Exiting...\n' 1>&2 && kill 0" EXIT
 
 main () {
     # Output constants used in formatting
     RED='\033[0;31m'
     GREEN='\033[0;32m'
-    NC='\033[0m' # No Color
-
-    trap "exit" INT TERM
-    trap "printf 'Exiting...\n' 1>&2 && kill 0" EXIT
+    NC='\033[0m' # No Color    
 
     printf "[" > failed.json
 
