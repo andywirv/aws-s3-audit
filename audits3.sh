@@ -34,13 +34,11 @@ main () {
         bucketregion=$(jq --raw-output '.LocationConstraint' \
                     <<< $(aws s3api  --profile $PROFILE get-bucket-location --bucket ${bucketArray[$i]}))
         if [ "$bucketregion" != "null" ]; then
-                # For some reason eu-west-1 buckets may also be labelled as EU. If that happens relabel as eu-west-1
-                if [ $bucketregion == "EU" ]; then
-                    bucketregion="eu-west-1"
-                fi
-                acl=$(aws --region $bucketregion --profile $PROFILE s3api  get-bucket-acl --bucket ${bucketArray[$i]});
-            else
-                acl=$(aws --profile $PROFILE s3api  get-bucket-acl --bucket ${bucketArray[$i]});
+            # For some reason eu-west-1 buckets may also be labelled as EU. If that happens relabel as eu-west-1
+            if [ $bucketregion == "EU" ]; then
+                bucketregion="eu-west-1"
+            fi
+            acl=$(aws --region $bucketregion --profile $PROFILE s3api  get-bucket-acl --bucket ${bucketArray[$i]});
         fi
         bucketname=${bucketArray[$i]}
         bucketPermission=$(jq --arg BCKT_NAME ${bucketname} \
