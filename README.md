@@ -34,10 +34,10 @@ aws_secret_access_key = [your secret key]
 ```
 
 Access Required for IAM user:
-
+```
 s3:GetBucketAcl
 s3:GetBucketLocation
 s3:GetBucketPolicy
 s3:ListAllMyBuckets
-
+```
 A full policy example can be found in `./aws_iam/policy.json`
