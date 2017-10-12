@@ -3,7 +3,7 @@ This tools checks the ACLs of AWS buckets to see if any permissions have been as
 
 ## Usage
 ```
-chmod +x audit.s3.sh
+chmod +x audit.s3.sh [aws credential profile name]
 ./audits3.sh
 
 Number of Buckets: 9
@@ -21,6 +21,23 @@ Number of Buckets: 9
 ## Installation
 
 You need:
-* AWS cli tools      http://docs.aws.amazon.com/cli/latest/userguide/installing.html 
+* AWS cli tools http://docs.aws.amazon.com/cli/latest/userguide/installing.html 
 * jq cli https://stedolan.github.io/jq/
 
+Config:
+Add at least one profile to ~/.aws/credentials.
+```
+cat ~/.aws/credentials 
+[default]
+aws_access_key_id = [your access key id]
+aws_secret_access_key = [your secret key]
+```
+
+Access Required for IAM user:
+
+s3:GetBucketAcl
+s3:GetBucketLocation
+s3:GetBucketPolicy
+s3:ListAllMyBuckets
+
+A full policy example can be found in `./aws_iam/policy.json`
