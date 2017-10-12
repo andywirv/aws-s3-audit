@@ -3,8 +3,8 @@ This tools checks the ACLs of AWS buckets to see if any permissions have been as
 
 ## Usage
 ```
-chmod +x audit.s3.sh [aws credential profile name]
-./audits3.sh
+chmod +x audit.s3.sh 
+./audits3.sh [aws credential profile name]
 
 Number of Buckets: 9
   1/9   : andy-perm-test                                                   : FAIL 
